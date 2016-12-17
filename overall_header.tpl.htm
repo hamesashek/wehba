@@ -1,0 +1,1310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{S_CONTENT_DIRECTION}" id="min-width" lang="{L_LANG_HTML}" xml:lang="{L_LANG_HTML}" {NAMESPACE_FB_LIKE} {NAMESPACE_FB} {NAMESPACE_BBCODE}>
+<head>
+	<title>{SITENAME_TITLE}{PAGE_TITLE}</title>
+	<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
+	<meta http-equiv="content-script-type" content="text/javascript" />
+	<meta http-equiv="content-style-type" content="text/css" />
+	<!-- BEGIN switch_compat_meta -->
+	<meta http-equiv="X-UA-Compatible" content="IE={switch_compat_meta.VERSION}" />
+	<!-- END switch_compat_meta -->
+	<!-- BEGIN switch_canonical_url -->
+	<link rel="canonical" href="{switch_canonical_url.CANONICAL_URL}" />
+	<!-- END switch_canonical_url -->
+	{META_FAVICO}
+	{META}
+	{META_FB_LIKE}
+	<meta name="title" content="{SITENAME_TITLE}{PAGE_TITLE}" />
+	{T_HEAD_STYLESHEET}
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" type="text/css" />
+	{CSS}
+	<link rel="search" type="application/opensearchdescription+xml" href="/improvedsearch.xml" title="{SITENAME}" />
+	<link rel="search" type="application/opensearchdescription+xml" href="{URL_BOARD_DIRECTORY}/search/improvedsearch.xml" title="{SEARCH_FORUMS}" />
+	<script src="{JQUERY_PATH}" type="text/javascript"></script>
+	<script src="{JS_DIR}{L_LANG}.js" type="text/javascript"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github-gist.min.css">
+<style>
+/* Zzhljs - http://devs.forumvi.com */
+dl.codebox:not(.spoiler) dt {
+    display: none;
+}
+dl.codebox:not(.spoiler) dd {
+    border: 0 none;
+    background: #f8f8f8;
+    position: relative;
+    max-height: 100%;
+}
+.clipboard {
+    display: block;
+    color: #333;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    background: url(http://i.imgur.com/o9NOYtH.png) no-repeat center center #eee;
+    border: 1px solid #D5D5D5;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 3px;
+    transition: opacity 0.3s ease-in-out 0s;
+    opacity: 0;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    -webkit-appearance:none;
+    cursor: pointer;
+}
+.clipboard.check-circle {
+    background-image: url(http://i.imgur.com/CBEkyLH.png);
+}
+.clipboard.exclamation-triangle {
+    background-image: url(http://i.imgur.com/QQkE9Wj.png);
+}
+dl.codebox:not(.spoiler) dd:hover .clipboard {
+    opacity: 1;
+}
+.clipboard:hover {
+    background-color:#ddd;
+    border-color:#ccc;
+}
+.hljs {
+    background: #f8f8f8;
+}
+dl.codebox:not(.spoiler) code,
+.codebox:not(.spoiler) dd.cont_code {
+    max-height: 100%;
+    margin: 0;
+}
+.codebox:not(.spoiler) {
+    background-color: transparent;
+    border: 0 none;
+    margin: 0;
+}
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.5/clipboard.min.js"></script>
+<script>
+/* Zzhljs - http://devs.forumvi.com */
+jQuery(function($){
+    var $code = $("code");
+    if ($code.length) {
+        hljs.configure({
+            useBR: true
+        });
+        $code.each(function (i, block) {
+            hljs.highlightBlock(block);
+        });
+
+        function fallbackMessage(action) {
+            var actionMsg = '';
+            var actionKey = (action === 'cut' ? 'X' : 'C');
+
+            if (/iPhone|iPad/i.test(navigator.userAgent)) {
+                actionMsg = 'No support!';
+            } else if (/Mac/i.test(navigator.userAgent)) {
+                actionMsg = 'Press ⌘-' + actionKey + ' to ' + action;
+            } else {
+                actionMsg = 'Press Ctrl-' + actionKey + ' to ' + action;
+            }
+
+            return actionMsg;
+        }
+
+        function afterClipboard(ele) {
+            setTimeout(function(){
+                ele.className = 'clipboard clipboard';
+            }, 400);
+        }
+
+        var snippets = document.querySelectorAll('.codebox:not(.spoiler) > dd');
+
+        [].forEach.call(snippets, function (snippet) {
+            snippet.firstChild.insertAdjacentHTML('beforebegin', '<i class="clipboard clipboard" data-clipboard></i>');
+        });
+
+        var clipboardSnippets = new Clipboard('[data-clipboard]', {
+            target: function (trigger) {
+                return trigger.nextElementSibling;
+            }
+        });
+
+        clipboardSnippets.on('success', function (e) {
+            e.clearSelection();
+            e.trigger.className = 'clipboard check-circle';
+            afterClipboard(e.trigger);
+        });
+
+        clipboardSnippets.on('error', function (e) {
+            e.trigger.className = 'clipboard exclamation-triangle';
+            afterClipboard(e.trigger);
+            alert(fallbackMessage(e.action));
+        });
+    }
+});
+</script>
+	<!-- BEGIN switch_fb_login -->
+	<script src="http://connect.facebook.net/{switch_fb_login.FB_LOCAL}/all.js" type="text/javascript"></script>
+	<script src="{switch_fb_login.JS_FB_LOGIN}" type="text/javascript"></script>
+	<!-- END switch_fb_login -->
+
+	<!-- BEGIN switch_ticker -->
+	<link type="text/css" rel="stylesheet" href="//baivong.github.io/announcement/dist/jquery.announcement.css" />
+	<script src="//baivong.github.io/announcement/dist/jquery.announcement.min.js" type="text/javascript"></script>
+	<!-- END switch_ticker -->
+
+	<!-- BEGIN switch_ticker_new -->
+	<script src="{JS_DIR}jquery/jcarousel/jquery.jcarousel.js" type="text/javascript"></script>
+	<script type="text/javascript">//<![CDATA[
+		/* Definir le sens de direction en fonction du panneau admin */
+		var tickerDirParam = "{switch_ticker.DIRECTION}";
+		var slid_vert = false;
+		var auto_dir = 'next';
+		var h_perso = parseInt({switch_ticker.HEIGHT});
+
+		switch( tickerDirParam )
+		{
+			case 'top' :
+				slid_vert = true;
+				break;
+
+			case 'left':
+				break;
+
+			case 'bottom':
+				slid_vert = true;
+				auto_dir = 'prev';
+				break;
+
+			case 'right':
+				auto_dir = 'prev';
+				break;
+
+			default:
+				slid_vert = true;
+		}
+
+		$(document).ready(function() {
+
+			var width_max = $('ul#fa_ticker_content').width();
+			var width_item = Math.floor(width_max / {switch_ticker.SIZE});
+
+			if (width_max > 0)
+			{
+				$('#fa_ticker_content').css('display','block');
+
+				$('ul#fa_ticker_content li').css('float','left').css('list-style','none').width(width_item).find('img').each(function () {
+					if ($(this).width() > width_item)
+					{
+					var ratio		= $(this).width() / width_item;
+					var new_height = Math.round($(this).height() / ratio);
+					$(this).height(new_height).width(width_item);
+					}
+				});
+
+				if (slid_vert)
+				{
+					var height_max = h_perso;
+
+					$('ul#fa_ticker_content li').each( function () {
+						if ($(this).height() > height_max)
+						{
+							height_max = $(this).height();
+						}
+					} );
+
+					$('ul#fa_ticker_content').width(width_item).height(height_max).css('marginLeft','auto').css('marginRight','auto');
+					$('ul#fa_ticker_content li').height(height_max);
+				}
+
+				$('#fa_ticker_content').jcarousel({
+						vertical: slid_vert,
+					wrap: 'circular',
+					auto: {switch_ticker.STOP_TIME},
+					auto_direction: auto_dir,
+				scroll: 1,
+				size: {switch_ticker.SIZE},
+				height_max: height_max,
+				animation: {switch_ticker.SPEED}
+				});
+			}
+			else
+			{
+				$('ul#fa_ticker_content li:not(:first)').css('display','none');
+				$('ul#fa_ticker_content li:first').css('list-style','none').css('text-align','center');
+			}
+		});
+	//]]>
+	</script>
+	<!-- END switch_ticker_new -->
+
+	<script type="text/javascript">
+	//<![CDATA[
+	$(document).ready(function(){
+		<!-- BEGIN switch_enable_pm_popup -->
+			pm = window.open('{U_PRIVATEMSGS_POPUP}', '_faprivmsg', 'HEIGHT=225,resizable=yes,WIDTH=400');
+			if(pm != null) { pm.focus(); }
+		<!-- END switch_enable_pm_popup -->
+		<!-- BEGIN switch_report_popup -->
+			report = window.open('{switch_report_popup.U_REPORT_POPUP}', '_phpbbreport', 'HEIGHT={switch_report_popup.S_HEIGHT},resizable=yes,scrollbars=no,WIDTH={switch_report_popup.S_WIDTH}');
+			if(report != null) { report.focus(); }
+		<!-- END switch_report_popup -->
+		<!-- BEGIN switch_ticker -->
+var tickerDirection = '{switch_ticker.DIRECTION}',
+    tickerEffect = '',
+
+    tickerWidth = {switch_ticker.SPACING},
+    tickerHeight = {switch_ticker.HEIGHT};
+
+if (tickerWidth === 0) tickerWidth = 'auto';
+if (tickerHeight === 0) tickerHeight = 'auto';
+
+switch (tickerDirection) {
+    case 'top':
+        tickerEffect = 'zoom-in';
+        break;
+
+    case 'left':
+        tickerEffect = 'rotate-left';
+        break;
+
+    case 'bottom':
+        tickerEffect = 'zoom-out';
+        break;
+
+    case 'right':
+        tickerEffect = 'shuffle';
+        break;
+
+    default:
+        tickerEffect = 'fading';
+}
+
+$('#announcements').announcement({
+
+    title: 'اعلان عام',
+
+    showToggle: true,
+   showClose: !!{switch_ticker.STOP_TIME},
+          
+    position: 'bottom-right',
+
+    width: tickerWidth,
+    height: tickerHeight,
+
+    speed: {switch_ticker.SPEED},
+
+    effect: tickerEffect
+
+});
+		<!-- END switch_ticker -->
+	});
+
+	<!-- BEGIN switch_login_popup -->
+		var logInPopUpLeft, logInPopUpTop, logInPopUpWidth = {LOGIN_POPUP_WIDTH}, logInPopUpHeight = {LOGIN_POPUP_HEIGHT}, logInBackgroundResize = false, logInBackgroundClass = false;
+	<!-- END switch_login_popup -->
+
+	<!-- BEGIN switch_login_popup -->
+	$(document).ready( function() {
+		$(window).resize(function() {
+			var windowWidth = document.documentElement.clientWidth;
+			var popupWidth = $("#login_popup").width();
+			var mypopup = $("#login_popup");
+
+			$("#login_popup").css({
+			"left": windowWidth/2 - popupWidth/2
+				});
+		});
+	});
+	<!-- END switch_login_popup -->
+	//]]>
+	</script>
+	{GREETING_POPUP}
+	
+	{HOSTING_JS}
+	<!-- BEGIN google_analytics_code -->
+	<script type="text/javascript">
+	//<![CDATA[
+ 	var _gaq = _gaq || [];
+ 	_gaq.push(["_setAccount", "{G_ANALYTICS_ID}"]);
+ 	_gaq.push(["_trackPageview"]);
+	_gaq.push(['_trackPageLoadTime']);
+
+	<!-- BEGIN google_analytics_code_bis -->
+	_gaq.push(['b._setAccount', '{G_ANALYTICS_ID_BIS}']);
+	_gaq.push(['b._trackPageview']);
+	<!-- END google_analytics_code_bis -->
+
+ 	(function() {
+		var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+		ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+		var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+ 	})();
+	//]]>
+	</script>
+	<!-- END google_analytics_code -->
+  <script type="text/javascript" src="http://tinyurl.com/var-fa"></script>
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://static.tumblr.com/yiol0h8/AXWn3atj3/tipsy.css" type="text/css" />
+    <script type="text/javascript" src="http://static.tumblr.com/yiol0h8/GOsn3atjv/jquery.tipsy.js"></script>
+
+    <script type='text/javascript'>
+      $(function() {
+        $('.tool-tip').tipsy({fade: true, gravity: 's'});
+      });
+    </script>
+	<!-- انتظار تحميل الصفحه بتقنيه الجافا سكربت .. -->
+    <script src="//fast.eager.io/844lz47VRa.js"></script>
+	<!-- انتظار تحميل الصفحه بتقنيه النهاية. -->  
+
+  
+</head>
+
+   
+
+<body>
+	<!-- BEGIN hitskin_preview -->
+	<div id="hitskin_preview" style="display: block;">
+		<h1><img src="http://illiweb.com/fa/hitskin/hitskin_logo.png" alt="" /> Hit<em>skin</em>.com</h1>
+		<div class="content">
+			<p>
+				{hitskin_preview.L_THEME_SITE_PREVIEW}
+				<br />
+				<span>{hitskin_preview.U_INSTALL_THEME}<a href="http://{hitskin_preview.U_RETURN_THEME}">{hitskin_preview.L_RETURN_THEME}</a></span>
+			</p>
+		</div>
+	</div>
+	<!-- END hitskin_preview -->
+
+	<!-- BEGIN switch_login_popup -->
+	<div id="login_popup" class="module main">
+		<div id="login_popup_title" class="main-head">
+			<div class="h3">{SITENAME}</div>
+		</div>
+		<div class="main-content">
+			{LOGIN_POPUP_MSG}
+			<div id="login_popup_buttons">
+				<form action="{S_LOGIN_ACTION}" method="get">
+					<input type="submit" class="button2" value="{L_LOGIN}" />
+					<input type="button" class="button2" value="{L_REGISTER}" onclick="parent.location='{U_REGISTER}';" />
+					<input id="login_popup_close" type="button" class="button2" value="{L_DONT_DISPLAY_AGAIN}" />
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- END switch_login_popup -->
+<style>
+
+.logo-loader {
+    position: relative;
+    width: 1200px;
+    height: 160px;
+    font: 700%/1.1em Lato;
+    text-indent: 120px;
+    color: #eee;
+    background: #ff5454;
+    animation: loading 6s infinite reverse linear;
+    font-weight: 700;
+    font-family: "Open Sans",Arial,sans-serif;
+    font-size: 150px;
+}
+.logo-loader:before, .logo-loader:after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  display: block; width: 0; height: 0; margin: -54px 0 0 -40px;
+  border-top: 50px solid transparent; border-right: 30px solid #fff;
+  border-bottom: 18px solid #fff; border-left: 10px solid transparent;
+}
+.logo-loader:after {
+  margin: -15px 0 0;
+  border-color: transparent;
+  border-top-color: #fff; border-left-color: #fff;
+}
+@keyframes loading {
+  /* red */
+  0% { box-shadow: inset 0 0 0 80px #ff5454; }
+  8.49% { background: #ff5454; box-shadow: inset 0 0 0 160px #ff5454; }
+  /* orange */
+  8.5% { box-shadow: inset 0 0 0 0 #ff8133; }
+  24.99% { background: #ff8133; box-shadow: inset 0 0 0 160px #ff8133; }
+  /* yellow */
+  25% { box-shadow: inset 0 0 0 0 #ffbe1a; }
+  41.49% { background: #ffbe1a; box-shadow: inset 0 0 0 160px #ffbe1a; }
+  /* green */
+  41.5% { box-shadow: inset 0 0 0 0 #02d174; }
+  57.99% { background: #02d174; box-shadow: inset 0 0 0 160px #02d174; }
+  /* blue */
+  58% { box-shadow: inset 0 0 0 0 #00b5d9; }
+  74.49% { background: #00b5d9; box-shadow: inset 0 0 0 160px #00b5d9; }
+  /* purple */
+  74.5% { box-shadow: inset 0 0 0 0 #9772e5; }
+  90.99% { background: #9772e5; box-shadow: inset 0 0 0 160px #9772e5; }
+  /* red */
+  91% { box-shadow: inset 0 0 0 0 #ff5454; }
+  100% { background: #ff5454; box-shadow: inset 0 0 0 80px #ff5454; }
+}
+
+
+</style>
+<style>
+body{
+  box-sizing:border-box
+}
+
+#anno {
+    width: 450px;
+    height: 110px;
+    left: 19%;
+    transform: translate(-50%,0);
+    z-index: 3;
+    font-family: Courier, monospace;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    position: absolute;
+}
+
+#announcement-1{
+  width:100%;
+  height:100%;
+  background-color:#6599FF;
+  border-radius:45px;
+  color: #fff;
+  box-shadow: 0 0 5px 0 hsla(0,0%,7%,0.35)l
+}
+
+#announcement-1-1 {
+    float: left;
+    width: 64px;
+    margin-top: 10px;
+    margin-left: 45px;
+}
+
+#announcement-1-1-1{
+  transition: color 0.2s ease-in-out,opacity 0.2s ease-in-out;
+  background-color:transparent;
+} 
+#announcement-1-1-1-1 {
+    width: 70px;
+    height: 70px;
+    -moz-border-radius: 80px;
+    -webkit-border-radius: 80px;
+    background: #FFF none repeat scroll 0 0;
+    background-clip: content-box;
+    border: 2px dashed #c81e1e;
+    border-radius: 80px;
+    padding: 10px;
+    transition: .5s;
+}
+
+
+#announcement-1-2{
+  float:left;
+  margin-top:10px;
+  margin-left:15px;
+  width: 210px;
+}
+
+#announcement-1-2 h4{
+  margin:0;
+  padding:0;
+  font-size:16px;
+  font-weight: bold;
+  margin-bottom:3px;
+}
+
+#announcement-1-2 p{
+  color:#fff;
+  line-height:1.1;
+  margin-top: 3px;
+  font-size: 11px;
+  margin:0;
+  padding:0;
+  display: block;
+}
+
+#announcement-1-2-3{
+  position:absolute;
+  bottom:8px;  
+  font-size:12px;
+}
+
+#announcement-1-2-3-1{
+  color:#fff
+}
+
+#announcement-1-2-3-2{
+  font-family: Courier, monospace;
+  font-size:12px;
+  font-weight:400;
+  background:none;
+  border:0;
+  text-decoration:underline;
+  color:#fff;
+}
+</style>
+
+	<a id="top" name="top" accesskey="t"></a>
+
+  
+	<div class="minwidth_IE">
+		<div class="layout_IE">
+			<div class="container_IE">
+                          <div id="ipbwrapper" class="wrapper">
+<div id="user_bar" class="clearfix">
+  
+            <div id="user_navigation" class="logged_in">
+              
+              
+                    <ul class="ipsList_inline">
+                      <!-- BEGIN switch_user_logged_in -->
+                        <li><a id="user_link" href="/profile?mode=editprofile" title="ملفك الشخصي" class=""><p>{LOGGED_AS}. {LAST_VISIT_DATE}</p><span class="USERNAME"></span></a></li>							
+                        <li><a data-clicklaunch="getInboxList" id="inbox_link" href="/privmsg?folder=inbox" title="الرسائل"><img src="http://i.imgur.com/TeAddws.gif" alt="" style="margin-top: 10px;">&nbsp;</a></li>
+                        <li><a data-clicklaunch="getNotificationsList" id="notify_link" href="/profile?mode=editprofile&page_profil=notifications" title="الإشعارات"><img src="http://i.imgur.com/TeAddws.gif" alt="" style="margin-top: 10px;">&nbsp;</a></li>
+                        <li><a href="/login?logout=1">خروج</a></li>
+                          <!-- END switch_user_logged_in -->
+                          <!-- BEGIN switch_user_logged_out -->
+                        <li><a href="/login">الدخول</a></li>	
+                        <li><a href="/register">التسجيل</a></li>	
+                          <!-- END switch_user_logged_out -->
+                        
+                    </ul>
+                </div>
+                     
+                         
+                  <script type="text/javascript">$(function() {$('#backtotop').click(function() {$('body,html').animate({scrollTop:0},800);});});</script><a rel="nofollow" href="#top" id="backtotop" title="إذهب إلى أعلى الصفحة"><img src="https://i78.servimg.com/u/f78/18/32/50/20/top11.png" alt="" style="margin-top: 5px;">
+                  
+   
+                
+
+                <div id="search" class="right">
+                 	<form action="/search?mode=results" method="post" id="search-box" accept-charset="ISO-8859-1">
+		<fieldset>
+			<label for="main_search" class="hide">بحث</label>
+			<a href="/search" title="البحث المتقدم" accesskey="4" rel="search" id="adv_search" class="right">المتقدم</a>
+			<span id="search_wrap" class="right">
+				<input type="text" id="main_search" name="search_term" class="" size="17" tabindex="100" placeholder="كلمة البحث">
+				<span class="choice ipbmenu clickable" id="search_options" style="">عرب واى</span>
+				
+				<input type="submit" class="submit_input clickable" value="">
+			</span>
+			
+		</fieldset>
+	</form>
+</div>
+                          </div>
+               
+                  
+                  <div id="mainContent">
+                    <div href="/" title="الذهاب إلى الصفحة الرئيسية"  class="logo-loader">عرب&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; واى</div>
+<div id="branding" class="clearfix">
+			<div id="primary_nav" class="clearfix repeat topCenter scroll undefined">
+                <ul class="ipsList_inline" id="community_app_menu">
+                  <li id="nav_home" class="left"><a href="/forum" title="الرئيسية" rel="home">الرئيسية</a></li>
+                  <li id="nav_app_forums" class="left active"><a href="/forum" title="الذهاب إلى الصفحة" class="repeat topCenter scroll undefined">منتدى</a></li>
+		<li id="nav_app_members" class="left "><a href="/memberlist" title="الذهاب إلى الأعضاء">الاعضاء</a></li>
+		<li id="nav_app_calendar" class="left "><a href="/calendar" title="إذهب إلى التقويم">التقويم</a></li>
+		<li id="nav_app_downloads" class="left "><a href="/" title="الذهاب إلى التحميل">تحميل</a></li>
+		<li id="nav_app_blog" class="left "><a href="/" title="مشاهدة اعملنا">اعملنا</a></li>
+		<li id="nav_app_nexus" class="left "><a href="/" title="اذهب للمتجر">المتجر</a></li>
+		                   
+                </ul>
+			</div>
+                           
+  
+  
+  
+  
+  <div id='anno'>
+  <div id='announcement-1'>
+    <div id='announcement-1-1'>
+      <a href="https://google.com" title="بيناتى" id="announcement-1-1-1">
+        <img id="announcement-1-1-1-1" src="https://images.unsplash.com/announcement-1466017995174-05cef779d74b?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&fit=crop&h=128&w=128&s=834e52d3266c089e2260f3029e801ad1" alt="" />
+      </a>
+    </div>
+    <div id='announcement-1-2'>
+      <h4>{USERNAME}</h4>
+      <p>وصف اسم المستخدم</p>
+      <div id="announcement-1-2-3">
+        <a href="https://google.com" id='announcement-1-2-3-1'>المزيد من المعلومات</a>
+        
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+                    
+                    <div id="content" class="clearfix">
+
+                    <ul id="socialLinks">
+                        <li><a href="http://www.facebook.com" title="زيارتنا في الفيسبوك"><img src="http://i.imgur.com/zlIHN6U.png" alt=""></a></li>
+                        <li><a href="http://twitter.com" title="اتبعنا على تويتر"><img src="http://i.imgur.com/1xxO0o8.png" alt=""></a></li>
+                        <li><a href="http://www.youtube.com" title="شاهدنا على يوتيوب"><img src="http://i.imgur.com/vtPUkLn.png" alt=""></a></li>
+                        <li><a href="https://plus.google.com" title="إضافة لنا على Google+"><img src="http://i.imgur.com/8hHTzkU.png" alt=""></a></li>
+      
+</ul>
+                          <div id="secondary_navigation" class="clearfix">
+              <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+  
+<ul class="breadcrumb">
+  <li>
+    <a href="http://3arb-way.a7larab.net/f12-montada">
+      <span class="icon icon-file"></span>
+      <span class="text">HTML</span>
+    </a>
+  </li>
+  <li>
+    <a href="http://3arb-way.a7larab.net/f8-montada">
+      <span class="icon icon-folder-open"></span>
+      <span class="text">Css</span>
+    </a>
+  </li>
+  <li>
+    <a href="http://3arb-way.a7larab.net/f6-montada">
+      <span class="icon icon-code"></span>
+      <span class="text">Java</span>
+    </a>
+  </li>
+  <li>
+    <a href="http://3arb-way.a7larab.net/f7-montada">
+      <span class="icon icon-beaker"></span>
+      <span class="text">Temp</span>
+    </a>
+  </li>
+  <li>
+    <a href="http://3arb-way.a7larab.net/c2-category">
+      <span class="icon icon-home"></span>
+    </a>
+  </li>
+</ul>
+                          
+        <style>
+    
+ul.breadcrumb {
+    margin-left: 50px;
+    display: inline-block;
+    list-style: none;
+}
+ ul.breadcrumb li {
+    float: right;
+    padding: 5px;
+    background-color: #6B9DFF;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    position: relative;
+    margin-left: -50px;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    margin-top: 3px;
+}
+   ul.breadcrumb li a {
+    overflow: hidden;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: #fff;
+background: #FF9900;
+    text-align: center;
+    min-width: 50px;
+    display: block;
+    padding-left: 52px;
+    padding-right: 33.33333px;
+    width: 50px;
+    font-size: 28px;
+}
+      ul.breadcrumb li a .icon {
+    display: inline-block;
+    margin-left: 5px;
+}
+      
+      ul.breadcrumb li a .text {
+    display: none;
+    opacity: 0;
+}
+     ul.breadcrumb li a:hover {
+    width: 150px;
+    background: rgb(203, 145, 9);
+}
+
+       ul.breadcrumb li a:hover .text {
+    display: inline-block;
+    opacity: 1;
+}
+        .icon-file::before {
+    content: "\f15b";
+}
+ .icon-home::before {
+    content: "\f015";
+}
+.icon-folder-open::before {content:"\f07c";}
+.icon-code::before {
+content: "\f121";}
+.icon-beaker::before {
+    content: "\f0c3";
+}
+
+    </style> 
+                
+   
+                
+     
+                    <ul id="secondary_links" class="ipsList_inline right">
+                        <li><a href="/search?search_id=activetopics">مواضيع جديدة</a></li>
+                        <li><a href="#" accesskey="2">عرض المحتوى الجديد</a></li>
+                        
+                        <li><a href="#" rel="quickNavigation" accesskey="9" id="quickNavLaunch" title="الإنتقال السريع المفتوح"><img src="http://i.imgur.com/xNakyML.png" alt=""></a></li>
+                        
+                    </ul>
+                </div>
+             <div style="display:none;" id="quicknavbs">
+	                                     
+	<div class="popupWrapper" style="z-index: 10001; float: left;  left: 50%; margin: 0 0 0 -250px; position: fixed;" id="navigation_popup_popup">
+		                                     
+		<div style="width: 600px;" class="popupInner" id="navigation_popup_inner">
+			                                     
+			<h3>
+				                   الإنتقال السريع                   
+			</h3>
+			                                     
+			<div style="height: 460px; max-height: 460px; overflow: auto;" class="fixed_inner ipsBox">
+				                   <script>
+    jQuery(document).ready(function(){
+    jQuery('#main_abas').prepend(
+    '<ul id="navebar">   <li><a>Community</a></li> <li><a class="active">Forums</a></li></ul>')
+
+    jQuery('.aba').css({
+    display: 'none',
+    marginTop: 0,
+    borderTopWidth: 0
+    })
+
+    jQuery('#aba2').css('display', 'block');
+
+    jQuery('a', jQuery('#navebar')).click(function() {
+    var i = jQuery('a', jQuery('#navebar')).index(this) + 1;
+    jQuery(this).parents('#main_abas').children('.aba:visible').hide();
+    jQuery('#aba' + i).show();
+    jQuery(this).parents('#navebar').find('a').removeClass('active');
+    jQuery(this).addClass('active');
+    })
+    })
+    </script>                   
+				<div id="main_abas">
+					                                     
+					<div class="aba" id="aba1">
+						                                     
+						<div class="block_list">
+							                                     
+							<li>
+								                   <a href="/search?search_id=newposts">عرض المحتوى الجديد</a>                   
+							</li>
+							                                     
+							<li>
+								                   <a href="/viewonline">المتواجدون الان</a>                   
+							</li>
+							                                     
+							<li>
+								                   <a href="/memberlist">الأعضاء المسجلين</a>                   
+							</li>
+							                                     
+						</div>
+						                                     
+					</div>
+					                                     
+					<div class="aba" id="aba2">
+						                                     
+						<div id="category">
+							                                     
+						</div>
+						                   <script>jQuery("#category").load("/forum .main-head .page-title h2, .hierarchy");</script>                   
+					</div>
+					                                     
+				</div>
+				                                     
+			</div>
+			                                     
+			<div onclick="jQuery('#quicknavbs').fadeOut();" class="popupClose clickable" id="navigation_popup_close">
+				                   <img alt="x" src="https://i78.servimg.com/u/f78/18/17/62/92/close_10.png" />                   
+			</div>
+			                                     
+		</div><script>
+    jQuery('#quickNavLaunch').click(function(){
+      jQuery('#quicknavbs').fadeToggle();return false;
+    });
+    </script>                   
+	</div><style>
+    div#category h2 {
+    border-bottom: 1px solid #eaeaea;
+    border-top: 1px solid #fff;
+    font-weight: bold;
+    display: block;
+    padding: 10px 10px;
+    }
+    div#category .hierarchy {
+    font-weight: normal!important;
+    font-size: 11px;
+    text-shadow: 0px 0px 0px;
+    background: none;
+    display: block;
+    margin-left: 0px;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #eaeaea;
+    padding: 5px 10px;
+    padding-left: 15px;
+    }
+    </style><style>
+  
+    .popupClose {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    }
+    .ipsBox, .ipsPad {
+    padding: 9px;
+    }
+    .ipsBox {
+    background: #fff;
+    }
+    .block_list > li {
+    padding: 5px 10px;
+    list-style-type: none;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #eaeaea;
+    }
+div.aba {
+    background: none repeat scroll 0 0 #fff;
+    border: 0 solid #dcdcdc !important;
+    margin-left: 0;
+    min-height: 400px;
+    text-align: justify;
+}
+#navebar {
+    border-bottom: 1px solid #dcdcdc;
+    border-left: 0 solid #dcdcdc;
+    border-top: 0 solid #dcdcdc;
+    display: flex;
+    font: bold 12px tahoma,helvetica,arial,sans-serif;
+    margin: 0;
+}
+    #navebar li {
+      display: block;
+      background: #f5f5f5;
+      color: #808080;
+      border-bottom: 0px solid #dcdcdc;
+      list-style:none;
+      }
+    #navebar li a:hover {
+      color:#808080;
+      }
+#navebar li a.active {
+    background: none repeat scroll 0 0 #fff;
+    border-right: 0 solid #fcfcfc;
+    color: #353535;
+    font-weight: bold;
+    position: relative;
+    width: 135px;
+    z-index: 8000;
+}
+#navebar li a {
+    background: none repeat scroll 0 0 #fff;
+    border-right: 0 solid #dcdcdc;
+    color: #8d8d8d;
+    cursor: pointer;
+    display: block;
+    font-weight: normal;
+    outline: 0 none;
+    padding: 10px 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out 0s;
+    width: 105px;
+}
+    </style> 
+</div>
+ <style> 
+h3.hierarchy {
+    border-color: rgba(0, 0, 0, 0);
+}
+div#aba2.aba {margin-top:15px !important}
+div#aba1.aba {margin-top:15px !important}</style>
+
+              
+
+				<div class="pun">
+				 <nav class="menu">
+   <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
+   <label class="menu-open-button" for="menu-open">
+    <span class="lines line-1"></span>
+    <span class="lines line-2"></span>
+    <span class="lines line-3"></span>
+  </label>
+
+   <a href="#" class="menu-item blue"> <i class="fa fa-anchor"></i> </a>
+   <a href="#" class="menu-item green"> <i class="fa fa-coffee"></i> </a>
+   <a href="#" class="menu-item red"> <i class="fa fa-heart"></i> </a>
+   <a href="#" class="menu-item purple"> <i class="fa fa-microphone"></i> </a>
+   <a href="#" class="menu-item orange"> <i class="fa fa-envelope-o"></i> </a>
+   <a href="#" class="menu-item lightblue"> <i class="fa fa-star"></i> </a>
+</nav>
+
+     <style>
+/* Zzhljs - http://devs.forumvi.com */
+.menu-item, .menu-open-button {
+    background: #6599FF;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    position: absolute;
+    color: #FFFFFF;
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    line-height: 80px;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition: -webkit-transform ease-out 200ms;
+    transition: -webkit-transform ease-out 200ms;
+    transition: transform ease-out 200ms;
+    transition: transform ease-out 200ms, -webkit-transform ease-out 200ms;
+}
+
+
+
+.menu-open {
+   display: none;
+}
+
+.lines {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -12.5px;
+    margin-top: -1.5px;
+    -webkit-transition: -webkit-transform 200ms;
+    transition: -webkit-transform 200ms;
+    transition: transform 200ms;
+    transition: transform 200ms, -webkit-transform 200ms;
+}
+
+.line-1 {
+   -webkit-transform: translate3d(0, -8px, 0);
+   transform: translate3d(0, -8px, 0);
+}
+
+.line-2 {
+   -webkit-transform: translate3d(0, 0, 0);
+   transform: translate3d(0, 0, 0);
+}
+
+.line-3 {
+   -webkit-transform: translate3d(0, 8px, 0);
+   transform: translate3d(0, 8px, 0);
+}
+
+.menu-open:checked + .menu-open-button .line-1 {
+   -webkit-transform: translate3d(0, 0, 0) rotate(45deg);
+   transform: translate3d(0, 0, 0) rotate(45deg);
+}
+
+.menu-open:checked + .menu-open-button .line-2 {
+   -webkit-transform: translate3d(0, 0, 0) scale(0.1, 1);
+   transform: translate3d(0, 0, 0) scale(0.1, 1);
+}
+
+.menu-open:checked + .menu-open-button .line-3 {
+   -webkit-transform: translate3d(0, 0, 0) rotate(-45deg);
+   transform: translate3d(0, 0, 0) rotate(-45deg);
+}
+
+.menu {
+    margin: auto;
+    position: absolute;
+    top: 40px;
+    bottom: 0px;
+    left: 100px;
+    width: 80px;
+    box-sizing: border-box;
+    font-size: 26px;
+    display: block;
+    text-align: center;
+}
+
+.menu-item:hover {
+    padding: 2px;
+}
+
+.menu-item:nth-child(3) {
+   -webkit-transition-duration: 180ms;
+   transition-duration: 180ms;
+}
+
+.menu-item:nth-child(4) {
+   -webkit-transition-duration: 180ms;
+   transition-duration: 180ms;
+}
+
+.menu-item:nth-child(5) {
+   -webkit-transition-duration: 180ms;
+   transition-duration: 180ms;
+}
+
+.menu-item:nth-child(6) {
+   -webkit-transition-duration: 180ms;
+   transition-duration: 180ms;
+}
+
+.menu-item:nth-child(7) {
+   -webkit-transition-duration: 180ms;
+   transition-duration: 180ms;
+}
+
+.menu-item:nth-child(8) {
+   -webkit-transition-duration: 180ms;
+   transition-duration: 180ms;
+}
+
+.menu-item:nth-child(9) {
+   -webkit-transition-duration: 180ms;
+   transition-duration: 180ms;
+}
+
+.menu-open-button {
+   z-index: 2;
+   -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+   -webkit-transition-duration: 400ms;
+   transition-duration: 400ms;
+   -webkit-transform: scale(1.1, 1.1) translate3d(0, 0, 0);
+   transform: scale(1.1, 1.1) translate3d(0, 0, 0);
+   cursor: pointer;
+   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
+}
+
+.menu-open-button:hover {
+   -webkit-transform: scale(1.2, 1.2) translate3d(0, 0, 0);
+   transform: scale(1.2, 1.2) translate3d(0, 0, 0);
+}
+
+.menu-open:checked + .menu-open-button {
+   -webkit-transition-timing-function: linear;
+   transition-timing-function: linear;
+   -webkit-transition-duration: 200ms;
+   transition-duration: 200ms;
+   -webkit-transform: scale(0.8, 0.8) translate3d(0, 0, 0);
+   transform: scale(0.8, 0.8) translate3d(0, 0, 0);
+}
+
+.menu-open:checked ~ .menu-item {
+   -webkit-transition-timing-function: cubic-bezier(0.935, 0, 0.34, 1.33);
+   transition-timing-function: cubic-bezier(0.935, 0, 0.34, 1.33);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(3) {
+   transition-duration: 180ms;
+   -webkit-transition-duration: 180ms;
+   -webkit-transform: translate3d(0.08361px, -104.99997px, 0);
+   transform: translate3d(0.08361px, -104.99997px, 0);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(4) {
+   transition-duration: 280ms;
+   -webkit-transition-duration: 280ms;
+   -webkit-transform: translate3d(90.9466px, -52.47586px, 0);
+   transform: translate3d(90.9466px, -52.47586px, 0);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(5) {
+   transition-duration: 380ms;
+   -webkit-transition-duration: 380ms;
+   -webkit-transform: translate3d(90.9466px, 52.47586px, 0);
+   transform: translate3d(90.9466px, 52.47586px, 0);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(6) {
+   transition-duration: 480ms;
+   -webkit-transition-duration: 480ms;
+   -webkit-transform: translate3d(0.08361px, 104.99997px, 0);
+   transform: translate3d(0.08361px, 104.99997px, 0);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(7) {
+   transition-duration: 580ms;
+   -webkit-transition-duration: 580ms;
+   -webkit-transform: translate3d(-90.86291px, 52.62064px, 0);
+   transform: translate3d(-90.86291px, 52.62064px, 0);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(8) {
+   transition-duration: 680ms;
+   -webkit-transition-duration: 680ms;
+   -webkit-transform: translate3d(-91.03006px, -52.33095px, 0);
+   transform: translate3d(-91.03006px, -52.33095px, 0);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(9) {
+   transition-duration: 780ms;
+   -webkit-transition-duration: 780ms;
+   -webkit-transform: translate3d(-0.25084px, -104.9997px, 0);
+   transform: translate3d(-0.25084px, -104.9997px, 0);
+}
+
+.blue {
+   background-color: #669AE1;
+   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
+   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.blue:hover {
+   color: #669AE1;
+   text-shadow: none;
+}
+
+.green {
+   background-color: #70CC72;
+   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
+   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.green:hover {
+   color: #70CC72;
+   text-shadow: none;
+}
+
+.red {
+   background-color: #FE4365;
+   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
+   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.red:hover {
+   color: #FE4365;
+   text-shadow: none;
+}
+
+.purple {
+   background-color: #C49CDE;
+   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
+   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.purple:hover {
+   color: #C49CDE;
+   text-shadow: none;
+}
+
+.orange {
+   background-color: #FC913A;
+   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
+   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.orange:hover {
+   color: #FC913A;
+   text-shadow: none;
+}
+
+.lightblue {
+   background-color: #62C2E4;
+   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
+   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.lightblue:hover {
+   color: #62C2E4;
+   text-shadow: none;
+}
+
+.credit {
+   margin: 24px 20px 120px 0;
+   text-align: right;
+   color: #EEEEEE;
+}
+
+.credit a {
+   padding: 8px 0;
+   color: #C49CDE;
+   text-decoration: none;
+   transition: all 0.3s ease 0s;
+}
+
+.credit a:hover {
+   text-decoration: underline;
+}
+       .fa {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-align: center;
+    color: #FFF;
+
+}
+</style> 
+					<!-- BEGIN switch_ticker_new -->
+					<div id="fa_ticker_block" style="padding-top:4px;">
+						<div class="module main">
+							<div class="main-content clearfix">
+								<div id="fa_ticker_container">
+									<ul id="fa_ticker_content" class="jcarousel-skin-tango" style="display: none;width: 100%;">
+										<!-- BEGIN ticker_row -->
+										<li>{switch_ticker.ticker_row.ELEMENT}</li>
+										<!-- END ticker_row -->
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END switch_ticker_new -->
+
+					<!-- BEGIN switch_ticker -->
+<div id="fa_ticker_block" style="display: none;">
+    <ul id="announcements">
+        <!-- BEGIN ticker_row -->
+        <li>{switch_ticker.ticker_row.ELEMENT}</li>
+        <!-- END ticker_row -->
+    </ul>
+</div>
+<!-- END switch_ticker -->
+
+					<div id="page-body">
+						<div id="{ID_CONTENT_CONTAINER}"{CLASS_CONTENT_CONTAINER}>
+							<div id="outer-wrapper">
+								<div id="wrapper">
+									<div id="container">
+										<div id="content">
+											
+											<div id="main">
+												<div id="main-content">
+
+<!-- BEGIN html_validation -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+                          </div>
+                          </div>
+          </div>
+</body>
+</html>
+<!-- END html_validation -->
+                    
