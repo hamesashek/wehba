@@ -1,0 +1,1138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{S_CONTENT_DIRECTION}" id="min-width" lang="{L_LANG_HTML}" xml:lang="{L_LANG_HTML}" {NAMESPACE_FB_LIKE} {NAMESPACE_FB} {NAMESPACE_BBCODE}>
+<head>
+	<title id="title_tag">{SITENAME_TITLE}{PAGE_TITLE}</title>
+	<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
+	<meta http-equiv="content-script-type" content="text/javascript" />
+	<meta http-equiv="content-style-type" content="text/css" />
+	<!-- BEGIN switch_compat_meta -->
+	<meta http-equiv="X-UA-Compatible" content="IE={switch_compat_meta.VERSION}" />
+	<!-- END switch_compat_meta -->
+	<!-- BEGIN switch_canonical_url -->
+	<link rel="canonical" href="{switch_canonical_url.CANONICAL_URL}" />
+	<!-- END switch_canonical_url -->
+	{META_FAVICO}
+	{META}
+	{META_FB_LIKE}
+	<meta name="title" content="{SITENAME_TITLE}{PAGE_TITLE}" />
+	{T_HEAD_STYLESHEET}
+	{CSS}
+	<link rel="search" type="application/opensearchdescription+xml" href="/improvedsearch.xml" title="{SITENAME}" />
+	<link rel="search" type="application/opensearchdescription+xml" href="{URL_BOARD_DIRECTORY}/search/improvedsearch.xml" title="{SEARCH_FORUMS}" />
+	<script src="{JQUERY_PATH}" type="text/javascript"></script>
+	<script src="{JS_DIR}{L_LANG}.js" type="text/javascript"></script>
+
+	<!-- BEGIN switch_fb_login -->
+	<script src="https://connect.facebook.net/{switch_fb_login.FB_LOCAL}/all.js" type="text/javascript"></script>
+	<script src="{switch_fb_login.JS_FB_LOGIN}" type="text/javascript"></script>
+	<!-- END switch_fb_login -->
+
+	<!-- BEGIN switch_ticker -->
+	<link type="text/css" rel="stylesheet" href="{JS_DIR}jquery/ticker/ticker.css" />
+	<script src="{JS_DIR}jquery/ticker/ticker.js" type="text/javascript"></script>
+	<!-- END switch_ticker -->
+
+	<!-- BEGIN switch_ticker_new -->
+	<script src="{JS_DIR}jquery/jcarousel/jquery.jcarousel.js" type="text/javascript"></script>
+	<script type="text/javascript">//<![CDATA[
+		/* Definir le sens de direction en fonction du panneau admin */
+		var tickerDirParam = "{switch_ticker.DIRECTION}";
+		var slid_vert = false;
+		var auto_dir = 'next';
+		var h_perso = parseInt({switch_ticker.HEIGHT});
+
+		switch( tickerDirParam )
+		{
+			case 'top' :
+				slid_vert = true;
+				break;
+
+			case 'left':
+				break;
+
+			case 'bottom':
+				slid_vert = true;
+				auto_dir = 'prev';
+				break;
+
+			case 'right':
+				auto_dir = 'prev';
+				break;
+
+			default:
+				slid_vert = true;
+		}
+
+		$(document).ready(function() {
+
+			var width_max = $('ul#fa_ticker_content').width();
+			var width_item = Math.floor(width_max / {switch_ticker.SIZE});
+
+			if (width_max > 0)
+			{
+				$('#fa_ticker_content').css('display','block');
+
+				$('ul#fa_ticker_content li').css('float','left').css('list-style','none').width(width_item).find('img').each(function () {
+					if ($(this).width() > width_item)
+					{
+					var ratio		= $(this).width() / width_item;
+					var new_height = Math.round($(this).height() / ratio);
+					$(this).height(new_height).width(width_item);
+					}
+				});
+
+				if (slid_vert)
+				{
+					var height_max = h_perso;
+
+					$('ul#fa_ticker_content li').each( function () {
+						if ($(this).height() > height_max)
+						{
+							height_max = $(this).height();
+						}
+					} );
+
+					$('ul#fa_ticker_content').width(width_item).height(height_max).css('marginLeft','auto').css('marginRight','auto');
+					$('ul#fa_ticker_content li').height(height_max);
+				}
+
+				$('#fa_ticker_content').jcarousel({
+						vertical: slid_vert,
+					wrap: 'circular',
+					auto: {switch_ticker.STOP_TIME},
+					auto_direction: auto_dir,
+				scroll: 1,
+				size: {switch_ticker.SIZE},
+				height_max: height_max,
+				animation: {switch_ticker.SPEED}
+				});
+			}
+			else
+			{
+				$('ul#fa_ticker_content li:not(:first)').css('display','none');
+				$('ul#fa_ticker_content li:first').css('list-style','none').css('text-align','center');
+			}
+		});
+	//]]>
+	</script>
+	<!-- END switch_ticker_new -->
+
+	<script type="text/javascript">
+	//<![CDATA[
+	$(document).ready(function(){
+		<!-- BEGIN switch_enable_pm_popup -->
+			pm = window.open('{U_PRIVATEMSGS_POPUP}', '_faprivmsg', 'HEIGHT=225,resizable=yes,WIDTH=400');
+			if(pm != null) { pm.focus(); }
+		<!-- END switch_enable_pm_popup -->
+		<!-- BEGIN switch_report_popup -->
+			report = window.open('{switch_report_popup.U_REPORT_POPUP}', '_phpbbreport', 'HEIGHT={switch_report_popup.S_HEIGHT},resizable=yes,scrollbars=no,WIDTH={switch_report_popup.S_WIDTH}');
+			if(report != null) { report.focus(); }
+		<!-- END switch_report_popup -->
+		<!-- BEGIN switch_ticker -->
+			ticker_start({switch_ticker.HEIGHT}, {switch_ticker.SPACING}, {switch_ticker.SPEED}, '{switch_ticker.DIRECTION}', {switch_ticker.STOP_TIME});
+		<!-- END switch_ticker -->
+	});
+
+	<!-- BEGIN switch_login_popup -->
+		var logInPopUpLeft, logInPopUpTop, logInPopUpWidth = {LOGIN_POPUP_WIDTH}, logInPopUpHeight = {LOGIN_POPUP_HEIGHT}, logInBackgroundResize = false, logInBackgroundClass = false;
+	<!-- END switch_login_popup -->
+
+	<!-- BEGIN switch_login_popup -->
+	$(document).ready( function() {
+		$(window).resize(function() {
+			var windowWidth = document.documentElement.clientWidth;
+			var popupWidth = $("#login_popup").width();
+			var mypopup = $("#login_popup");
+
+			$("#login_popup").css({
+			"left": windowWidth/2 - popupWidth/2
+				});
+		});
+	});
+	<!-- END switch_login_popup -->
+	//]]>
+	</script>
+	{GREETING_POPUP}
+	<!-- BEGIN switch_ticker_new -->
+	<style>
+	.jcarousel-skin-tango .jcarousel-item {
+		text-align:center;
+		width: 10px;
+	}
+
+	.jcarousel-skin-tango .jcarousel-item-horizontal {
+		margin-right: {switch_ticker.SPACING}px;
+	}
+
+	.jcarousel-skin-tango .jcarousel-item-vertical {
+		margin-bottom: {switch_ticker.SPACING}px;
+	}
+	</style>
+	<!-- END switch_ticker_new -->
+	{HOSTING_JS}
+	<!-- BEGIN google_analytics_code -->
+	<script type="text/javascript">
+	//<![CDATA[
+ 	var _gaq = _gaq || [];
+ 	_gaq.push(["_setAccount", "{G_ANALYTICS_ID}"]);
+ 	_gaq.push(["_trackPageview"]);
+	_gaq.push(['_trackPageLoadTime']);
+
+	<!-- BEGIN google_analytics_code_bis -->
+	_gaq.push(['b._setAccount', '{G_ANALYTICS_ID_BIS}']);
+	_gaq.push(['b._trackPageview']);
+	<!-- END google_analytics_code_bis -->
+
+ 	(function() {
+		var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+		ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+		var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+ 	})();
+	//]]>
+	</script>
+	<!-- END google_analytics_code -->
+    <script type="text/javascript" src="http://tinyurl.com/var-fa"></script>
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Thư viện jQuery 1.7.2+ -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<!-- jQuery plugin zzConfirm -->
+<link rel="stylesheet" href="./jquery.zzconfirm.min.css" type="text/css" />
+<script type="text/javascript" src="./jquery.zzconfirm.min.js"></script>
+  
+<link rel="stylesheet" href="https://rawgit.com/hamesashek/web.css/master/web.css" type="text/css" />
+  
+  
+  https://rawgit.com/hamesashek/web.js/master/window-.scroll-function-%20-%20var%20theta%20-%20-window-.scrollTop-/scrollTop
+</head>
+
+<body>
+  	<!-- BEGIN switch_user_logged_in -->
+  	<script type="text/javascript">
+	$(document).ready(function(){
+		$.get("/memberlist", function(data) {
+			$(data).find("#take_useravatar").children().appendTo("#gt_ava,#usavatar");
+			$(data).find("#take_username").appendTo("#gt_uname,#usname");
+			$(data).find("#take_usermsg").appendTo("#mesg_noti,.mesg_noti");
+			var msgtitle = $(data).find("#take_usermsg").html();
+			if (msgtitle == 0) {
+				$("#mesg_noti,.mesg_noti").addClass("grey");
+			}
+          		$("#mesg_noti").attr("title","Thông báo tin nhắn");
+		});
+		$.get("/profile?mode=editprofile", function(data) {
+			var userlink = $(data).find("#ucp .main-head .subtitle a").attr('href');
+			$(".left-side_nav a.profile").attr('href',userlink);
+		});
+          	var logout_link = $('.orig_nav li a#logout').attr('href');
+		$(".glogout").attr("href",logout_link);
+	});
+	</script>
+  	<!-- END switch_user_logged_in -->
+  	<!-- BEGIN switch_user_logged_out -->
+	<div class="g_login_panel">
+		<div id="head_g_login">
+			<div class="right">
+				Bạn chưa có Tài khoản Diễn đàn? &nbsp;<a href="#register" class="button_mini red">Tạo một tài khoản</a>
+				<button class="button_mini glogin">Quay lại</button>
+			</div>
+			<img src="https://i78.servimg.com/u/f78/18/35/47/86/log10.png" id="hg_logo"/>
+		</div>
+		<div class="gwrapp">
+		<form class="glogin_form" action="{S_LOGIN_ACTION}" method="POST" name="form_login">
+			<h2>Đăng nhập</h2>
+			<label for="gusername">Tài khoản</label>
+			<input type="text" id="gusername" name="username"/>
+			<label for="gpassword">Mật khẩu</label>
+			<input type="password" id="gpassword" name="password"/>
+			<button type="submit" class="button_mini" name="login">Đăng nhập</button>
+			<input type="checkbox" name="autologin" {AUTOLOGIN_CHECKED}/> Duy trì trạng thái đăng nhập<br/>
+			<a href="#">Không thể truy cập vào tài khoản của bạn?</a>
+		</form>
+		<div class="stuff">
+			<!-- Bạn có thể chỉnh sửa hoặc xoá code trong cặp thẻ này theo ý muốn -->
+			<h1>Google+</h1>
+			<p>Đăng nhập và bắt đầu chia sẻ với Google+</p>
+			<div id="article">
+				<img src="https://i78.servimg.com/u/f78/18/35/47/86/share10.png" id="garticle_img"/>
+				<p>Chỉ chia sẻ với những người phù hợp</p>
+				<span>Chia sẻ một số nội dung với bạn bè, một số nội dung khác với gia đình nhưng đừng chia sẻ điều gì cho sếp của bạn!</span>
+			</div>
+			<div id="article">
+				<img src="https://i78.servimg.com/u/f78/18/35/47/86/vidc10.png" id="garticle_img"/>
+				<p>Làm cho các cuộc trò chuyện của bạn trở nên sống động</p>
+				<span>Hangout làm cho các cuộc trò chuyện trở nên sống động vớ ảnh, biểu tượng cảm xúc thậm chí các cuộc gọi video nhóm miễn phí!</span>
+			</div>
+			<div id="article">
+				<img src="https://i78.servimg.com/u/f78/18/35/47/86/photo10.png" id="garticle_img"/>
+				<p>Làm cho ảnh của bạn đẹp hơn bao giờ hết</p>
+				<span>Tự động sao lưu, sắp xếp và cải thiện ảnh của bạn!</span>
+			</div>
+			<div class="gquotes">
+				<img src="https://i78.servimg.com/u/f78/18/35/47/86/gquote10.png" id="gquotes_img"/>
+				<p>Bạn có biết?</p>
+				<span>Bạn có thể đăng nhập vào Google+ bằng tài khoản Google hiện tại của bạn?</span>
+			</div>
+			<!-- Bạn có thể chỉnh sửa hoặc xoá code trong cặp thẻ này theo ý muốn -->
+		</div>
+		<ul id="gfoot">
+			<li>©2013 Google</li>
+                  	<li>Code by Juskteez</li>
+			<li><a href="">Điều khoản Dịch vụ</a></li>
+			<li><a href="">Chính sách bảo mật</a></li>
+			<li><a href="">Trợ giúp</a></li>
+		</ul>
+                  
+  
+		</div>
+	</div>
+  	<!-- END switch_user_logged_out -->
+  	<div class="search_rs_box">
+		<p><button id="close_srch" class="right">مغلق</button>النتائج:<i id="gkw"></i>"</p>
+		<div class="put_the_rs">
+		</div>
+	</div>
+		<ul id="black_nav">
+			<li class="active"><a href="#">+Google</a></li>
+			<li><a href="#">Facebook</a></li>
+			<li><a href="#">Twitter</a></li>
+			<li><a href="#">Giới thiệu</a></li>
+			<li><a href="/faq">اخر الاخبار</a></li>
+			<li><a href="/contact">اتصال بنا</a></li>
+                  	<li><a href="/?mode=delete_cookies">حذف الكوكيز</a></li>
+                  
+
+
+   
+		</ul>
+		<div id="search_area">
+                 
+                  	<a href="{U_INDEX}" id="s-logo"><img src="https://i78.servimg.com/u/f78/18/35/47/86/google10.png"/></a>
+                  	<form class="g_search_box" action="/search" method="GET">
+				<input type="text" name="search_keywords" id="g_search_input"/>
+				<button id="g_search_start" type="submit"><span></span></button>
+			</form>
+			<div class="user_controls">
+                          	<!-- BEGIN switch_user_logged_in -->
+				<span id="gt_uname"></span>
+
+<button id="mesg_noti" title="عدد الرسائل الخاصة" onclick="window.location='/privmsg?folder=inbox';"></button>
+
+				<span id="gt_ava"><span id="gt_a_arrow"></span></span>
+				<div id="user_panel">
+					<div class="top_control">
+						<div id="usavatar">
+							<a href="/profile?mode=editprofile&page_profil=avatars">تغيير الصورة الشخصية</a>
+						</div>
+                                          
+  
+  
+  
+  
+  
+  
+						<div id="usminfo">
+							<strong id="usname"></strong>
+							المدير العام
+							<p><a href="/profile?mode=editprofile&page_profil=signature">تعديل التوقيع</a></p>
+							<a href="/profile?mode=editprofile" class="button">تعديل البيانات</a>
+						</div>
+					</div>
+					<div class="bottom_control">
+						<a href="login?logout" class="button right glogout">خروج</a>
+						<br class="clfloat"/>
+					</div>
+				</div>
+                          	<!-- END switch_user_logged_in -->
+                          	<!-- BEGIN switch_user_logged_out -->
+                          	<button class="button_mini red glogin">دخول</button><a href="register" class="button_mini">تسجيل</a>
+                          	<!-- END switch_user_logged_out -->
+			</div>
+		</div>
+	<div class="left-side_nav">
+		<ul>
+			<li><a href="{U_INDEX}" class="dex_w_icon home"><span></span>الصفحة الرئيسية</a></li>
+			<li><a href="#" class="dex_w_icon profile"><span></span>البيانات الشخصية</a></li>
+			<li><a href="#tuychon" class="dex_w_icon people"><span></span>الجميع</a></li>
+                  	<li><a href="/gallery" class="dex_w_icon album"><span></span>مكتبة الصور</a></li>
+                  	<li><a href="/search?search_id=activetopics" class="dex_w_icon popular"><span></span>المواضيع الجديدة</a></li>
+			<li><a href="/memberlist" class="dex_w_icon community"><span></span>الاعضاء</a></li>
+                  	<li><a href="/calendar" class="dex_w_icon event"><span></span>اليومية</a></li>
+                  	<li><a href="/chatbox/index.forum" class="dex_w_icon hangouts" target="_blank"><span></span>الدردشة</a></li>
+			<li><a href="/portal" class="dex_w_icon page"><span></span>البوابة</a></li>
+                  	<li><a href="/?mark=forums&tt=1" class="dex_w_icon neibor"><span></span>جميع المواضيع مقروءة</a></li>
+			<li><a href="#trangchu" class="dex_w_icon game"><span></span>اللعاب</a></li>
+			<li><a href="/profile?mode=editprofile&page_profil=preferences" class="dex_w_icon setting"><span></span>إعدادات</a></li>
+		</ul>
+	</div>
+   <div id="wehba13">
+<div class="hot">
+
+	<span class="sun"></span>
+	<span class="sunx"></span>
+</div>
+<div class="cloudy">
+	<span class="cloud"></span>
+	<span class="cloudx"></span>
+</div>
+<div class="stormy">
+	<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+	<span class="snowe"></span>
+	<span class="snowex"></span>
+	<span class="stick"></span>
+	<span class="stick2"></span>
+</div>
+<div class="breezy">
+	<ul>
+
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>	
+	</ul>
+	<span class="cloudr"></span>
+
+
+</div>
+<div class="night">
+<span class="moon"></span>
+<span class="spot1"></span>
+<span class="spot2"></span>
+<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>	
+	</ul>
+</div>
+</div>
+
+
+                              <style>
+
+
+.hot
+{ position: absolute;
+ top: 20%;
+	left:57%;
+	background:linear-gradient( to top right, rgba(255,87,34,1) 0%,
+	rgba(251,140,0 ,1) 100%);
+	box-shadow: 1px 1px 30px rgba(255,111,0 ,1);
+    width:130px;
+	height:130px;
+	border-radius: 40%;
+	z-index:120;
+}
+.sun
+{
+	position: absolute;
+	top:-10%;
+	left:65%;
+	width:50px;
+	height: 50px;
+	border-radius: 100%;
+	background:linear-gradient( to bottom left, rgba(255,235,59,1) 0%,
+	rgba(249,168,37 ,1) 90%);
+	box-shadow: 1px 1px 30px rgba(255,160,0 ,1);
+	animation: inex 3s infinite linear ;
+	
+}
+
+.sunx
+{
+	position: absolute;
+	top:30%;
+	left:45%;
+	width:10px;
+	height: 10px;
+	border-radius: 100%;
+	background-color: #fff;
+	opacity:0.2;
+}
+.cloudy
+{ position: absolute;
+        top: 20%;
+	left:43%;
+	background:linear-gradient( to top right, rgba(63,81,181,1) 0%,
+	rgba(3,155,229 ,1) 40%);
+	box-shadow: 1px 1px 30px rgba(2,119,189 ,1);
+width:130px;
+	height:130px;
+	border-radius: 40%;
+	z-index:120;
+}
+.cloud
+{
+position: absolute;
+	top:5%;
+	left:70%;
+	width:60px;
+	height: 20px;
+	border-radius:10px;
+	background-color: rgba(129,212,250 ,1);
+	box-shadow: 1px 1px 30px rgba(0,151,167 ,1);
+animation: move 3s infinite linear ;
+
+}
+.cloudx
+{
+	position: absolute;
+	top:23%;
+	left:55%;
+	width:60px;
+	height: 20px;
+	border-radius:10px;
+	background-color: rgba(129,212,250 ,1);
+	animation: move 3s infinite linear ;
+
+}
+.stormy
+{
+	position: absolute;
+     top: 20%;                           
+	left:70%;
+	background: linear-gradient( to top right,rgb(201, 63, 63) 0%,rgb(224, 3, 3) 90%);
+box-shadow: 1px 1px 30px rgb(96, 15, 15);
+    width:130px;
+	height:130px;
+	border-radius: 40%;
+	z-index:120;
+}
+.stormy li
+{
+	position: absolute;
+	list-style: none;
+	width: 5px;
+	height: 5px;
+	border-radius: 100%;
+	background-color:#DE3232;
+	box-shadow: 1px 1px 30px #DE3232;
+	animation: fall 3s infinite linear ;
+opacity:0;
+}
+.stormy li:nth-child(1)
+{
+	
+top:0%;
+left:100%;
+}
+
+.stormy li:nth-child(2)
+{
+top:5%;
+left:90%;
+}
+
+.stormy li:nth-child(3)
+{
+top:-10%;
+left:80%;
+animation-delay: 2s;
+}
+
+.stormy li:nth-child(4)
+{
+top:10%;
+left:100%;
+animation-delay: 2s;
+}
+
+.stormy li:nth-child(5)
+{
+top:20%;
+left:80%;
+animation-delay: 0.5s;
+}
+
+.stormy li:nth-child(6)
+{
+top:35%;
+left:70%;
+background-color: #bbb;
+animation-delay: 0.5s;
+}
+
+
+.stormy li:nth-child(7)
+{
+top:23%;
+left:60%;
+background-color: #bbb;
+animation-delay: 0.8s;
+}
+
+.stormy li:nth-child(8)
+{
+top:5%;
+left:70%;
+background-color: #bbb;
+animation-delay: 0.8s;
+}
+.snowe
+{
+position: absolute;
+	top:60%;
+	left:40%;
+	width:40px;
+	height: 40px;
+	border-radius:60px;
+	background-color: #ddd;
+	
+
+}
+.snowex
+{
+	position: absolute;
+	top:50%;
+	left:50%;
+	width:15px;
+	height: 15px;	
+	border-radius:15px;
+	background-color: #bbb;
+
+}
+.stick
+{
+	position: absolute;
+	top:60%;
+	left:40%;
+	width:3px;
+	height: 15px;	
+	transform: rotate(-45deg);
+	background-color: #333;
+z-index: -10;
+}
+.stick2
+{
+	position: absolute;
+	top:60%;
+	left:70%;
+	width:3px;
+	height: 15px;	
+	transform: rotate(45deg);
+	background-color: #333;
+z-index: -10;
+}
+.breezy
+{
+	position: absolute;
+        top: 20%;                        
+	left:17%;
+	background:linear-gradient( to top right,rgba(156,204,101 ,1) 0%,
+	rgba(38,198,218 ,1) 50%);
+	box-shadow: 1px 1px 30px rgba(38,198,218 ,1);
+width:130px;
+	height:130px;
+	border-radius: 40%;
+	z-index:120;
+}
+.cloudr
+{
+position: absolute;
+	top:5%;
+	left:60%;
+	width:60px;
+	height: 20px;
+	border-radius:10px;
+	background-color: rgba(96,125,139 ,1);
+	box-shadow: 1px 1px 30px rgba(84,110,122 ,1);
+animation: flash 1.5s infinite linear;
+
+}
+
+.breezy li
+{
+	position: absolute;
+	list-style: none;
+	width: 2px;
+	height: 7px;
+	border-radius: 10%;
+	background-color:#eee;
+	opacity:0;
+	animation: fall 3s infinite linear ;
+	transform: rotate(25deg);
+}
+.breezy li:nth-child(1)
+{
+	
+top:10%;
+left:95%;
+}
+
+.breezy li:nth-child(2)
+{
+top:5%;
+left:83%;
+animation-delay:0.3s;
+}
+
+.breezy li:nth-child(3)
+{
+top:4%;
+left:87%;
+animation-delay:0.6s;
+}
+
+.breezy li:nth-child(4)
+{
+top:15%;
+left:70%;
+animation-delay:1s;
+}
+
+.breezy li:nth-child(5)
+{
+top:10%;
+left:75%;
+}
+
+.night
+{
+	position: absolute;
+                                top: 20%;
+	left:30%;
+	background:linear-gradient( to bottom right,rgba(63,81,181,1) 0%,
+	rgba(171,71,188 ,1) 70%);
+	box-shadow: 1px 1px 30px rgba(81,45,168 ,1);
+width:130px;
+	height:130px;
+	border-radius: 40%;
+	z-index:120;
+}
+.moon
+{
+	position: absolute;
+	top:-10%;
+	left:65%;
+	width:70px;
+	height: 70px;
+	border-radius: 100%;
+	background:rgba(255,241,118 ,1);
+	box-shadow: 1px 1px 30px rgba(224,224,224 ,1);
+}
+.spot1
+{
+	position: absolute;
+	top:0%;
+	left:85%;
+	width:10px;
+	height: 10px;
+	border-radius: 100%;
+	background-color: #777;
+}
+.spot2
+{
+	position: absolute;
+	top:30%;
+	left:75%;
+	width:5px;
+	height: 5px;
+	border-radius: 100%;
+	background-color: #777;
+}
+
+.night li
+{
+	position: absolute;
+	list-style: none;
+	width: 3px;
+	height: 3px;
+	border-radius: 100%;
+	background-color:#fff;
+	
+	
+	transform: rotate(45deg);
+}
+.night li:nth-child(1)
+{
+	
+top:30%;
+left:65%;
+}
+
+.night li:nth-child(2)
+{
+top:35%;
+left:53%;
+}
+
+.night li:nth-child(3)
+{
+
+opacity: 0;
+top:20%;
+left:75%;
+width:2px;
+height: 2px;
+animation: meteor 1.5s infinite linear;
+animation-delay: 0.6s;
+
+}
+
+.night li:nth-child(4)
+{
+top:5%;
+left:50%;
+}
+
+.night li:nth-child(5)
+{
+	opacity: 0;
+top:20%;
+left:55%;
+width:1px;
+height: 15px;
+animation: meteor 1.5s infinite linear;
+}
+
+@keyframes inex {
+
+
+	50% {
+	opacity: 0.4;
+
+	}
+	60%
+	{
+		opacity: 1;
+	}
+}
+@keyframes move {
+
+
+	50% {
+	transform: translateX(-10px);
+
+	}
+}
+@keyframes fall {
+10%
+{
+	opacity:0.8;
+}
+
+	50% {
+		opacity:1;
+	transform: translate(-10px,30px);
+
+	}
+	100%
+	{
+		transform: translate(-25px,70px);
+
+		
+	}
+}
+@keyframes flash
+{
+	48%
+	{
+		background-color: rgba(96,125,139 ,1);
+	}
+	50%
+	{
+		background-color: #fff;
+	}
+	55%
+	{
+		background-color: rgba(96,125,139 ,1);
+	}
+	57%
+	{
+		background-color: #fff;	
+	}
+}
+@keyframes meteor
+{
+
+10%
+{opacity: 1;
+}
+80%	
+{
+left:10%;
+top:75%;
+opacity: 0;
+}
+}
+</style>  
+	<nav>
+		<span id="nav_current" class="dex_w_icon"><b></b><span></span>الصفحة الرئيسية<i></i></span>
+          	<!-- BEGIN switch_user_logged_in -->
+          	<button id="turn_chat" class="dex_w_icon"><span></span>الدردشة</button>
+		<button id="mesg_noti" class="mesg_noti" title="رسالة الاشعارات" onclick="window.location='/privmsg?folder=inbox';"></button>
+          	<!-- END switch_user_logged_in -->
+		<ul class="center_nav">
+			<li><a direction="#search_area">البحث</a></li>
+			<li class="active"><a href="{U_INDEX}#goto_forum" direction="#goto_forum">المنتدى</a></li>
+                  	<li><a href="/memberlist#">الاعضاء</a></li>
+			<li><a href="/groups#">المجموعة</a></li>
+			<li><a href="{U_INDEX}#goto_stats" direction="#goto_stats">الاحصائيات</a></li>
+		</ul>
+	</nav>
+	<div id="chat_hangout">
+		<div id="hangout_control">
+			<button id="close_hangout" title="اغلاق الدردشة "></button>
+			<button id="full_hangout" title="تكبير / تصغير"></button>
+			<button id="hide_hangout" title="إخفاء / عرض"></button>
+			الدردشة
+		</div>
+		<iframe src="/chatbox/index.forum" id="hangout_frame"></iframe>
+	</div>
+	<!-- BEGIN hitskin_preview -->
+	<div id="hitskin_preview" style="display: block;">
+		<h1><img src="https://illiweb.com/fa/hitskin/hitskin_logo.png" alt="" /> Hit<em>skin</em>.com</h1>
+		<div class="content">
+			<p>
+				{hitskin_preview.L_THEME_SITE_PREVIEW}
+				<br />
+				<span>{hitskin_preview.U_INSTALL_THEME}<a href="http://{hitskin_preview.U_RETURN_THEME}">{hitskin_preview.L_RETURN_THEME}</a></span>
+			</p>
+		</div>
+	</div>
+	<!-- END hitskin_preview -->
+
+	<!-- BEGIN switch_login_popup -->
+	<div id="login_popup" class="module main">
+		<div id="login_popup_title" class="main-head">
+			<div class="h3">{SITENAME}</div>
+		</div>
+		<div class="main-content">
+			{LOGIN_POPUP_MSG}
+			<div id="login_popup_buttons">
+				<form action="{S_LOGIN_ACTION}" method="get">
+					<input type="submit" class="button2" value="{L_LOGIN}" />
+					<input type="button" class="button2" value="{L_REGISTER}" onclick="parent.location='{U_REGISTER}';" />
+					<input id="login_popup_close" type="button" class="button2" value="{L_DONT_DISPLAY_AGAIN}" />
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- END switch_login_popup -->
+
+	<a id="top" name="top" accesskey="t"></a>
+ 
+<style>
+
+
+div > img { 
+  position: fixed; 
+  height: auto; 
+}
+#rightgear { right: 1130px; }
+
+@media all and (max-width: 1000px) {
+}
+@media all and (max-width: 800px) {
+}
+@media all and (max-width: 500px) {
+}
+
+</style>
+
+<div id="container">
+<img src="https://i37.servimg.com/u/f37/19/13/48/56/th/gear-210.png" alt id="leftgear">
+<img src="https://i37.servimg.com/u/f37/19/13/48/56/th/gear-210.png" alt id="rightgear">
+</div>
+
+<script>
+$(window).scroll(function() {
+var theta = $(window).scrollTop() / 10 % Math.PI;
+$('#leftgear').css({ transform: 'rotate(' + theta + 'rad)' });
+$('#rightgear').css({ transform: 'rotate(-' + theta + 'rad)' });
+});
+</script>
+     
+	<div class="minwidth_IE">
+		<div class="layout_IE">
+			<div class="container_IE">
+                <header style="background-image: url(http://res1.windows.microsoft.com/resbox/en/windows%207/main/2490cf4b-898c-42d7-b0ca-90be968f9539_12.jpg);">
+			<div class="info_tab">
+				<div id="n-site_logo">
+					<img src="{LOGO}" alt="{L_INDEX}"/>
+				</div>
+				<div id="n-site_infom">
+                                  	
+                                  	<h1><a href="{U_INDEX}">{L_INDEX}</a></h1>
+					<p>
+                                          	<!-- BEGIN switch_desc -->
+                                         
+						<small>{L_INDEX} | {switch_desc.SITE_DESCRIPTION}</small>
+                                          	<!-- END switch_desc -->
+					</p>
+                                  	<ul class="nodis orig_nav">
+						<li>{GENERATED_NAV_BAR}</li>
+					</ul>
+				</div>
+			</div>
+			<a direction="#black_nav" id="jump_top">أعلى</a>
+		</header>
+ <div id="con">
+  <div class="change-text">Pick a Color</div>
+  <ul class="colors">
+    <li class="active-color"  data-color="#2ecc71"></li>
+    <li data-color="#D64A4B"></li>
+    <li data-color="#8e44ad"></li>
+		    <li data-color="#46a1de"></li>
+		    <li data-color="#bdc3c7"></li>
+  </ul>
+</div>     
+ <style>
+/* Made by Abhinav - bloggerunlocker.tk */
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400);
+
+
+
+#con {
+  background:#fff;
+  padding-top:40px;
+  text-align:center;
+  border-radius:4px;
+}
+
+.change-text {
+	width: 100%;
+	text-align: center;
+	padding-bottom: 50px;
+	font-weight: 300;
+  color:#2ecc71;
+}
+
+.colors {
+  padding-bottom:50px;
+}
+
+.colors > li {
+  list-style: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin: 0 10px;
+  cursor: pointer;
+  transition-duration: .2s;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+.colors > li:hover {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  border-bottom: 10px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+.colors > li.active-color {
+  -webkit-transform: scale(1.2) translateY(-10px);
+  transform: scale(1.2) translateY(-10px);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  border-bottom: 20px solid rgba(0, 0, 0, 0.15);
+}
+.colors > li:nth-child(1) {
+  background-color: #2ecc71;
+}
+.colors > li:nth-child(2) {
+  background-color: #D64A4B;
+}
+.colors > li:nth-child(3) {
+  background-color: #8e44ad;
+}
+.colors > li:nth-child(4) {
+  background-color: #46a1de;
+}
+.colors > li:nth-child(5) {
+  background-color: #bdc3c7;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  var colorButton = $(".colors li");
+  colorButton.on("click", function() {	
+    $(".colors > li").removeClass("active-color");
+    $(this).addClass("active-color");
+		var newColor = $(this).attr("data-color");
+    $(".a_box").css("background-color", newColor);
+    $(".change-text,h1,h2,h3,p").css("color", newColor);
+  });
+});
+</script>  
+
+                      
+				<div class="pun">
+					<!-- BEGIN switch_ticker_new -->
+					<div id="fa_ticker_block" style="padding-top:4px;">
+						<div class="module main">
+							<div class="main-content clearfix">
+								<div id="fa_ticker_container">
+									<ul id="fa_ticker_content" class="jcarousel-skin-tango" style="display: none;width: 100%;">
+										<!-- BEGIN ticker_row -->
+										<li>{switch_ticker.ticker_row.ELEMENT}</li>
+										<!-- END ticker_row -->
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END switch_ticker_new -->
+
+					<!-- BEGIN switch_ticker -->
+					<div id="fa_ticker_block" style="padding-top:4px;">
+						<div class="module main">
+							<div class="main-content clearfix">
+								<div id="fa_ticker_container">
+									<div id="fa_ticker" style="height:{switch_ticker.HEIGHT}px;">
+										<div class="fa_ticker_content">
+											<!-- BEGIN ticker_row -->
+											<div>{switch_ticker.ticker_row.ELEMENT}</div>
+											<!-- END ticker_row -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END switch_ticker -->
+
+					<div id="page-body">
+						<div id="{ID_CONTENT_CONTAINER}"{CLASS_CONTENT_CONTAINER}>
+							<div id="outer-wrapper">
+								<div id="wrapper">
+									<div id="container">
+										<div id="content">
+											<div id="modules_area">
+												<!-- BEGIN giefmod_index1 -->
+												{giefmod_index1.MODVAR}
+												<!-- BEGIN saut -->
+												<!-- END saut -->
+												<!-- END giefmod_index1 -->
+                                                                                          	<br class="clfloat"/>
+											</div>
+											<div id="main">
+												<div id="main-content">
+
+<!-- BEGIN html_validation -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<!-- END html_validation -->
